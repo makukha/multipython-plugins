@@ -8,7 +8,7 @@
 
 These plugins are intended to be installed under [multipython](https://github.com/makukha/multipython) docker image. This is done automatically during multipython release, and there seems to be no reason to manually install any of them.
 
-* [tox-multipython](#tox-multipython) — Python interpreter resolution plugin for [tox](https://tox.wiki) 3 and 4
+* [tox-multipython](#tox-multipython) — Python interpreter discovery plugin for [tox](https://tox.wiki) 3 and 4
 * [virtualenv-multipython](#virtualenv-multipython) — [virtualenv](https://virtualenv.pypa.io) discovery plugin
 
 ## Use cases
@@ -47,76 +47,6 @@ $ pip install tox-multipython
 
 No configuration steps are needed.
 
-## Testing
-
-There is one test suite:
-
-1. `tox3` — `tox>=3,<4` is installed in *host tag* environment, and `tox run` is executed on `tox.ini` with env names equal to *target tags*. This test includes subtests:
-    - assert `{env_python}` version inside tox env
-    - assert `python` version inside tox env
-    - install externally built *sample package* in tox environment
-    - execute entrypoint of *sample package*
-
-Virtualenv supports discovery plugins since v20. In v20.22, it dropped support for Python <=3.6, in v20.27 it dropped support for Python 3.7.
-
-This is why we use 6 different test setups:
-
-1. `tox3` + `virtualenv>=20`
-1. `tox3` + `virtualenv>=20,<20.27`
-1. `tox3` + `virtualenv>=20,<20.22`
-
-### Test report
-
-When `tox-multipython` is installed inside *host tag* environment, it allows to use selected ✅ *target tag* (create virtualenv environment or use as tox env name in `env_list`) and automatically discovers corresponding [multipython](https://github.com/makukha/multipython) executable. For failing 💥 *target tag*, interpreter is discoverable, but virtual environment with *sample package* cannot be created.
-
-*Host tag* and *Target tags* are valid [multipython](https://hub.docker.com/r/makukha/multipython) tags. *Host tags* are listed vertically (rows), *target tags* are listed horizontally (columns).
-
-<table>
-<tbody>
-
-<tr>
-<td>
-<code>tox>=3,<4</code>, <code>virtualenv>=20</code>
-<!-- docsub: begin -->
-<!-- docsub: x pretty tox3-v__ -->
-<!-- docsub: lines after 1 upto -1 -->
-<pre>
-</pre>
-<!-- docsub: end -->
-</td>
-</tr>
-
-<tr>
-<td>
-<code>tox>=3,<4</code>, <code>virtualenv>=20,<20.27</code>
-<!-- docsub: begin -->
-<!-- docsub: x pretty tox3-v27 -->
-<!-- docsub: lines after 1 upto -1 -->
-<pre>
-</pre>
-<!-- docsub: end -->
-</td>
-</tr>
-
-<tr>
-<td>
-<code>tox>=3,<4</code>, <code>virtualenv>=20,<20.22</code>
-<!-- docsub: begin -->
-<!-- docsub: x pretty tox3-v22 -->
-<!-- docsub: lines after 1 upto -1 -->
-<pre>
-</pre>
-<!-- docsub: end -->
-</td>
-</tr>
-
-</tbody>
-</table>
-
-## Changelog
-
-Check [tox-multipython's changelog](https://github.com/makukha/multipython-plugins/tree/main/plugins/tox-multipython/CHANGELOG.md)
-
 
 # virtualenv-multipython
 
@@ -126,6 +56,20 @@ Check [tox-multipython's changelog](https://github.com/makukha/multipython-plugi
 This plugin is intended to be installed under [multipython](https://github.com/makukha/multipython) docker image. This is done automatically during multipython release, and there seems to be no reason to install this plugin manually by anyone.
 
 Environment names supported are all [multipython](https://github.com/makukha/multipython) tags.
+
+This plugin allows to use multipython tags in virtualenv:
+
+```shell
+$ virtualenv --python py314t /tmp/venv
+```
+
+## Behaviour
+
+* Loosely follow behaviour of builtin virtualenv discovery, with some important differences:
+* Try requests one by one, starting with [`--try-first-with`](https://virtualenv.pypa.io/en/latest/cli_interface.html#try-first-with); if one matches multipython tag or is an absolute path, return it to virtualenv.
+* If no version was requested at all, use `sys.executable`
+* If no request matched conditions above, fail to discover interpreter.
+* In particular, command names on `PATH` are not discovered.
 
 ## Installation
 
@@ -152,67 +96,113 @@ discovery = multipython
 
 Add these lines to one of [virtualenv configuration files](https://virtualenv.pypa.io/en/latest/cli_interface.html#conf-file). Under e.g. Debian `root`, the file is `/root/.config/virtualenv/virtualenv.ini`
 
-## Usage
 
-This plugin allows using multipython tags in virtualenv:
+# Testing
 
-```shell
-$ virtualenv --python py314t /tmp/venv
-```
+Testing suites (scenarios) for python discovery and provisioning virtual environments:
+1. [**tox3**](#venv) — under tox 3
+2. [**tox4**](#venv) — under tox 4
+3. [**venv**](#venv) — in virtualenv
 
-## Behaviour
+Virtualenv supports discovery plugins since v20. In v20.22, it dropped support for Python <=3.6, in v20.27 it dropped support for Python 3.7. This is why for every scenario above we test separate cases with different outcomes:
 
-* Loosely follow behaviour of builtin virtualenv discovery, with some important differences:
-* Try requests one by one, starting with [`--try-first-with`](https://virtualenv.pypa.io/en/latest/cli_interface.html#try-first-with); if one matches multipython tag or is an absolute path, return it to virtualenv.
-* If no version was requested at all, use `sys.executable`
-* If no request matched conditions above, fail to discover interpreter.
-* In particular, command names on `PATH` are not discovered.
+1. `virtualenv>=20`
+2. `virtualenv>=20,<20.27`
+3. `virtualenv>=20,<20.22`
 
-## Testing
+In every case, both `tox-multipython` and `virtualenv-multipython` are installed under *host tag environment* and used to discover and/or initialize *target tag environments*, where tags are all tags supported by multipython.
 
-There are two test suites:
+When plugins are installed inside *host tag* environment, for every *target tag* environment icons are used to denote test outcome:
 
-1. `venv` — Install `virtualenv` in *host tag* environment and create virtual environments for all *target tags*. Environment's python version must match *target tag*.
-2. `tox4` — `tox` and `virtualenv` are installed in *host tag* environment, and `tox run` is executed on `tox.ini` with env names equal to *target tags*. This test includes subtests:
-    - assert `{env_python}` version inside tox env
-    - assert `python` version inside tox env
-    - install externally built *sample package* in tox environment
-    - execute entrypoint of *sample package*
+* ✅ — all testing requirements are satisfied for *target tag*
+* 🚫️ — *target tag* interpreter is not discoverable
+* 💥 — *target tag* interpreter is discoverable, but virtual environment with *sample package* cannot be created
 
-Virtualenv supports discovery plugins since v20. In v20.22, it dropped support for Python <=3.6, in v20.27 it dropped support for Python 3.7.
 
-This is why we use 6 different test setups:
+## tox3
 
-1. `venv` + `virtualenv>=20`
-1. `venv` + `virtualenv>=20,<20.27`
-1. `venv` + `virtualenv>=20,<20.22`
-1. `tox4` + `virtualenv>=20`
-1. `tox4` + `virtualenv>=20,<20.27`
-1. `tox4` + `virtualenv>=20,<20.22`
+### Assumptions on *host tag*
 
-### Test report
+* `tox>=3,<4`
+* `virtualenv` — 3 different cases
+* `tox-multipython` and `virtualenv-multipython` are installed
+* `VIRTUALENV_DISCOVERY` environment variable is not set
 
-When `virtualenv-multipython` is installed inside *host tag* environment, it allows to use selected ✅ *target tag* (create virtualenv environment or use as tox env name in `env_list`) and automatically discovers corresponding [multipython](https://github.com/makukha/multipython) executable. For prohibited 🚫️ *target tag*, python executable is not discoverable. For failing 💥 *target tag*, interpreter is discoverable, but virtual environment with *sample package* cannot be created.
+### Requirements on *target tag*
 
-*Host tag* and *Target tags* are valid [multipython](https://hub.docker.com/r/makukha/multipython) tags. *Host tags* are listed vertically (rows), *target tags* are listed horizontally (columns).
+* `tox` environment for *target tag* is created
+* inside tox environment, `{envpython}` version matches *target tag*
+* inside tox environment, `python` version matches *target tag*
+* *sample package* is successfully installed in tox environment
+* entrypoint script of *sample package* is successfully called
 
+<small>
 <table>
+<thead>
+<th><code>tox>=3,<4; virtualenv>=20</code></th>
+<th><code>tox>=3,<4; virtualenv>=20,<20.27</code></th>
+<th><code>tox>=3,<4; virtualenv>=20,<20.22</code></th>
+</thead>
 <tbody>
-
 <tr>
-
 <td>
-<code>virtualenv>=20</code>
 <!-- docsub: begin -->
-<!-- docsub: x pretty venv-v__ -->
+<!-- docsub: x pretty tox3-v__ -->
 <!-- docsub: lines after 1 upto -1 -->
 <pre>
 </pre>
 <!-- docsub: end -->
 </td>
-
 <td>
-<code>tox>=4,<5</code>, <code>virtualenv>=20</code>
+<!-- docsub: begin -->
+<!-- docsub: x pretty tox3-v27 -->
+<!-- docsub: lines after 1 upto -1 -->
+<pre>
+</pre>
+<!-- docsub: end -->
+</td>
+<td>
+<!-- docsub: begin -->
+<!-- docsub: x pretty tox3-v22 -->
+<!-- docsub: lines after 1 upto -1 -->
+<pre>
+</pre>
+<!-- docsub: end -->
+</td>
+</tr>
+</tbody>
+</table>
+</small>
+
+
+## tox4
+
+### Assumptions on *host tag*
+
+* `python>=3.7`
+* `tox>=4,<5`
+* `virtualenv` — 3 different cases
+* `tox-multipython` and `virtualenv-multipython` are installed
+* `VIRTUALENV_DISCOVERY=multipython`
+
+### Requirements on *target tag*
+
+* `tox` environment for *target tag* is created
+* inside tox environment, `{env_python}` version matches *target tag*
+* inside tox environment, `python` version matches *target tag*
+* *sample package* is successfully installed in tox environment
+* entrypoint script of *sample package* is successfully called
+
+<small>
+<table>
+<thead>
+<th><code>tox>=4,<5; virtualenv>=20</code></th>
+<th><code>tox>=4,<5; virtualenv>=20,<20.27</code></th>
+<th><code>tox>=4,<5; virtualenv>=20,<20.22</code></th>
+</thead>
+<tbody>
+<tr>
+<td>
 <!-- docsub: begin -->
 <!-- docsub: x pretty tox4-v__ -->
 <!-- docsub: lines after 1 upto -1 -->
@@ -220,23 +210,7 @@ When `virtualenv-multipython` is installed inside *host tag* environment, it all
 </pre>
 <!-- docsub: end -->
 </td>
-
-</tr>
-
-<tr>
-
 <td>
-<code>virtualenv>=20,<20.27</code>
-<!-- docsub: begin -->
-<!-- docsub: x pretty venv-v27 -->
-<!-- docsub: lines after 1 upto -1 -->
-<pre>
-</pre>
-<!-- docsub: end -->
-</td>
-
-<td>
-<code>tox>=4,<5</code>, <code>virtualenv>=20,<20.27</code>
 <!-- docsub: begin -->
 <!-- docsub: x pretty tox4-v27 -->
 <!-- docsub: lines after 1 upto -1 -->
@@ -244,23 +218,7 @@ When `virtualenv-multipython` is installed inside *host tag* environment, it all
 </pre>
 <!-- docsub: end -->
 </td>
-
-</tr>
-
-<tr>
-
 <td>
-<code>virtualenv>=20,<20.22</code>
-<!-- docsub: begin -->
-<!-- docsub: x pretty venv-v22 -->
-<!-- docsub: lines after 1 upto -1 -->
-<pre>
-</pre>
-<!-- docsub: end -->
-</td>
-
-<td>
-<code>tox>=4,<5</code>, <code>virtualenv>=20,<20.22</code>
 <!-- docsub: begin -->
 <!-- docsub: x pretty tox4-v22 -->
 <!-- docsub: lines after 1 upto -1 -->
@@ -268,13 +226,70 @@ When `virtualenv-multipython` is installed inside *host tag* environment, it all
 </pre>
 <!-- docsub: end -->
 </td>
-
 </tr>
-
 </tbody>
 </table>
+</small>
 
 
-## Changelog
+## venv
 
-Check [virtualenv-multipython's changelog](https://github.com/makukha/multipython-plugins/tree/main/plugins/virtualenv-multipython/CHANGELOG.md)
+### Assumptions on *host tag*
+
+* `virtualenv` — 3 different cases
+* `virtualenv-multipython` is installed
+* `VIRTUALENV_DISCOVERY=multipython`
+
+### Requirements on *host tag*
+
+* when called with no `--python` requested, `virtualenv` uses *host tag* python
+
+### Requirements on *target tag*
+
+* `virtualenv` environment for *target tag* is created
+* inside virtualenv environment, `bin/python` version matches *target tag*
+* *sample package* is successfully installed in virtualenv environment
+* entrypoint script of *sample package* is successfully called
+
+<small>
+<table>
+<thead>
+<th><code>virtualenv>=20</code></th>
+<th><code>virtualenv>=20,<20.27</code></th>
+<th><code>virtualenv>=20,<20.22</code></th>
+</thead>
+<tbody>
+<tr>
+<td>
+<!-- docsub: begin -->
+<!-- docsub: x pretty venv-v__ -->
+<!-- docsub: lines after 1 upto -1 -->
+<pre>
+</pre>
+<!-- docsub: end -->
+</td>
+<td>
+<!-- docsub: begin -->
+<!-- docsub: x pretty venv-v27 -->
+<!-- docsub: lines after 1 upto -1 -->
+<pre>
+</pre>
+<!-- docsub: end -->
+</td>
+<td>
+<!-- docsub: begin -->
+<!-- docsub: x pretty venv-v22 -->
+<!-- docsub: lines after 1 upto -1 -->
+<pre>
+</pre>
+<!-- docsub: end -->
+</td>
+</tr>
+</tbody>
+</table>
+</small>
+
+
+# Changelog
+
+Check [multipython-plugins changelog](https://github.com/makukha/multipython-plugins/tree/main/CHANGELOG.md)
