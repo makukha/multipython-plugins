@@ -125,7 +125,7 @@ When plugins are installed inside *host tag* environment, for every *target tag*
 
 * `tox>=3,<4`
 * `virtualenv` — 3 different cases
-* `tox-multipython` and `virtualenv-multipython` are installed
+* `tox-multipython` is installed
 * `VIRTUALENV_DISCOVERY` environment variable is not set
 
 ### Requirements on *target tag*

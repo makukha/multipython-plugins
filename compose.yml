@@ -1,0 +1,15 @@
+services:
+
+  runtest:
+    image: makukha/multipython:unsafe
+    working_dir: /work/tests
+    entrypoint: bash test.sh
+    volumes:
+      - .:/work
+
+  rundebug:
+    extends:
+      service: runtest
+    hostname: rundebug
+    environment:
+      DEBUG: true
