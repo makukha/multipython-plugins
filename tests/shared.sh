@@ -2,7 +2,8 @@
 set -eEuo pipefail
 
 
-export SAMPLEPKG_DIR=/work/tests/samplepkg
+export SAMPLEPKG="$(find "/work/tests/samplepkg/dist" -name '*.whl')"
+[ -n "$SAMPLEPKG" ]
 
 
 if [ "${DEBUG:-}" = "true" ]; then
@@ -17,6 +18,7 @@ else
 fi
 
 export PIP_ROOT_USER_ACTION=ignore
+export TOX_WORK_DIR=/tmp/.tox
 
 
 # helpers

@@ -73,8 +73,9 @@ test *case:
     if [ -n "{{case}}" ]; then
       docker compose run --rm runtest run "{{case}}"
     else
-      cases="$(docker compose run --rm runtest cases)"
-      parallel --load 90% --bar --color-failed docker compose run --rm runtest run {} ::: "${cases}"
+      for case in $(docker compose run --rm runtest cases); do
+        docker compose run --rm runtest run "${case}"
+      done
     fi
 
 

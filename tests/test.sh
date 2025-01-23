@@ -39,14 +39,14 @@ run_case () {
   # cleanup multipython defaults
   py uninstall --no-update-info 2>/dev/null || true
   # run
-  pushd "$SCRIPT_DIR" 2>/dev/null
+  pushd "$SCRIPT_DIR" >/dev/null
   if bash "test_$SUITE.sh" "$DEPS" "$TAG" "$DATA"; then
     printf 'PASSED: %s [%s] %ss\n' "$1" "$DATA" "$SECONDS"
   else
     printf 'FAILED: %s [%s] %ss\n' "$1" "$DATA" "$SECONDS"
     exit 1
   fi
-  popd 2>/dev/null
+  popd >/dev/null
 }
 
 case "$1" in
