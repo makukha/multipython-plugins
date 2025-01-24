@@ -14,6 +14,7 @@ def match_tag(tag):  # type: (str) -> bool
 
 
 def get_tag_path(tag):  # type: (str) -> str | None
+    # ruff: noqa: S603,S607
     out = check_output(['py', 'bin', '--path', tag])
     enc = sys.getfilesystemencoding()
     path = (out.decode() if enc is None else out.decode(enc)).strip()

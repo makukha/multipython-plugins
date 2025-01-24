@@ -2,7 +2,7 @@ from __future__ import print_function
 import logging
 import os
 
-import pluggy  # type: ignore
+import pluggy
 from virtualenv_multipython.tag import match_tag, get_tag_path
 
 
