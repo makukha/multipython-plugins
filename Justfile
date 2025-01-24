@@ -147,11 +147,8 @@ version *component:
 
 # collect changelog entries
 [group('release')]
-changelog member:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    version=$(uv run bump-my-version show current_version 2>/dev/null)
-    uv run towncrier build --yes --version "$version"
+changelog:
+    uv run towncrier build --yes --version "$(uv run bump-my-version show current_version 2>/dev/null)"
     sed -e's/^### \(.*\)$/***\1***/; s/\([a-z]\)\*\*\*$/\1:***/' -i '' CHANGELOG.md
 
 
