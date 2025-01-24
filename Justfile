@@ -96,7 +96,12 @@ shell:
 [group('dev')]
 docs:
   uv run docsub x generate
-  uv run docsub apply -i README.md
+  uv run docsub apply -i \
+    plugins/tox-multipython/docs/part/main.md \
+    plugins/tox-multipython/README.md \
+    plugins/virtualenv-multipython/docs/part/main.md \
+    plugins/virtualenv-multipython/README.md \
+    README.md
 
 
 # free disk space

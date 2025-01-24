@@ -68,7 +68,7 @@ multipython = "virtualenv_multipython.discover:MultiPython"
 current_version = "0.5.0"
 allow_dirty = true
 files = [
-  {filename = "README.md"},
+  {filename = "docs/part/badges.md"},
   {filename = "src/virtualenv_multipython/__init__.py"},
 ]
 

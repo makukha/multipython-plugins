@@ -69,7 +69,7 @@ multipython = "tox_multipython.hookimpl"
 current_version = "0.3.0"
 allow_dirty = true
 files = [
-  {filename = "README.md"},
+  {filename = "docs/part/badges.md"},
   {filename = "src/tox_multipython/__init__.py"},
 ]
 
