@@ -9,6 +9,7 @@ from virtualenv_multipython.tag import match_tag, get_tag_path
 # tox version
 
 import tox
+
 TOX3 = tox.__version__.startswith('3.')
 
 
@@ -44,6 +45,7 @@ hookimpl = pluggy.HookimplMarker('tox')
 
 
 if TOX3:
+
     @hookimpl
     def tox_get_python_executable(envconfig):  # type: ignore
         """Return a python executable for the given python base name."""
