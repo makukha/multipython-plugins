@@ -36,7 +36,7 @@ sync:
 [group('dev')]
 news type id *msg:
     #!/usr/bin/env bash
-    set -euxo pipefail
+    set -euo pipefail
     if [ "{{id}}" = "-" ]; then
       id=`git rev-parse --abbrev-ref HEAD | cut -d- -f1`
     else
@@ -71,20 +71,19 @@ test *case:
     make build
     trap 'docker compose kill' SIGINT
     if [ -n "{{case}}" ]; then
-      docker compose run --rm runtest run "{{case}}"
+      time docker compose run --rm runtest run "{{case}}"
     else
-      for case in $(docker compose run --rm runtest cases); do
-        docker compose run --rm runtest run "${case}"
-      done
+      time parallel --jobs 50% --load 90% --bar --color-failed --halt now,fail=1 \
+        docker compose run --rm runtest run {} \
+        ::: "$(docker compose run --rm runtest cases)"
     fi
 
 
 # run specific test in debug mode
 [group('dev')]
 debug case:
-    make all
-    docker buildx bake base
-    docker compose run --rm -i rundebug "{{case}}"
+    make build
+    docker compose run --rm -i rundebug run "{{case}}"
 
 
 # shell to testing container
@@ -128,8 +127,19 @@ clean:
 
 # bump project version (major|minor|patch)
 [group('release')]
-version:
-    uv run bump-my-version bump -- {{{{PART}}
+version *component:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -n "{{component}}" ]; then
+        cd "plugins/{{component}}"
+        echo "Bumping plugin {{component}}:"
+    else
+        echo "Bumping project multipython-plugins:"
+    fi
+    uv run bump-my-version show-bump
+    printf 'Enter bump path: '
+    read BUMP
+    uv run bump-my-version bump -- "$BUMP"
     uv lock
 
 
