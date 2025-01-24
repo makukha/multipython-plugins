@@ -157,7 +157,6 @@ changelog member:
 
 # publish package on PyPI
 [group('release')]
-push-pypi member:
-    rm -rf dist
-    make pkg
-    uv publish
+push-pypi plugin:
+    make build
+    cd plugins/{{plugin}} && uv publish
