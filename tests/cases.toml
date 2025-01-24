@@ -1,0 +1,167 @@
+[requirements]
+
+# tox
+tox3 = "tox>=3,<4"
+tox4 = "tox>=4,<5"
+venv = ""
+
+# virtualenv
+v__ = "virtualenv>=20"
+v27 = "virtualenv>=20,<20.27"
+v22 = "virtualenv>=20,<20.22"
+
+
+[tox3]
+
+[tox3.py314t]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py313t]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py314]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py313]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py312]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py311]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py310]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py39]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py38]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py37]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="py{36,35,27}", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py36]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py35]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox3.py27]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+
+
+[tox4]
+
+[tox4.py314t]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py313t]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py314]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py313]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py312]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py311]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py310]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py39]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py38]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[tox4.py37]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+
+
+[venv]
+
+[venv.py314t]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py313t]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py314]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py313]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py312]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py311]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py310]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py39]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py38]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py37]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37}", noinstall="", notfound="py{36,35,27}"}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py36]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py35]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+[venv.py27]
+v__ = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v27 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}
+v22 = {passing="py{314t,313t,314,313,312,311,310,39,38,37,36,35,27}", noinstall="", notfound=""}

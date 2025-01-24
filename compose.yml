@@ -1,0 +1,24 @@
+services:
+
+  runtest:
+    image: makukha/multipython:unsafe
+    working_dir: /work/tests
+    entrypoint: bash test.sh
+    environment:
+      PIP_CACHE_DIR: /tmp/pip_cache
+      VIRTUALENV_OVERRIDE_APP_DATA: /tmp/virtualenv_app_data
+    volumes:
+      - pip_cache:/tmp/pip_cache
+      - virtualenv_app_data:/tmp/virtualenv_app_data
+      - .:/work
+
+  rundebug:
+    extends:
+      service: runtest
+    hostname: rundebug
+    environment:
+      DEBUG: true
+
+volumes:
+  pip_cache:
+  virtualenv_app_data:
