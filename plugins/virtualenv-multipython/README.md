@@ -1,5 +1,5 @@
 # virtualenv-multipython
-> virtualenv discovery plugin for [multipython](https://github.com/makukha/multipython)
+> [virtualenv](http://virtualenv.pypa.io) discovery plugin for [multipython](https://github.com/makukha/multipython)
 
 <!-- docsub: begin -->
 <!-- docsub: include docs/part/badges.md -->
