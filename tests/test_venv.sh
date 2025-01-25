@@ -10,6 +10,8 @@ validate_image_tags_coverage "$PASSING $NOINSTALL $NOTFOUND"
 
 # setup
 py install --sys "$HOST" --no-update-info
+pip uninstall -y tox virtualenv
+rm /root/.config/virtualenv/virtualenv.ini
 pip_install $(tr : ' ' <<<"$DEPS") \
   "virtualenv-multipython @ file://$(find /work/plugins/virtualenv-multipython/dist -name '*.whl')"
 pip_install_if_debug loguru

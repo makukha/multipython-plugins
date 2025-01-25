@@ -37,6 +37,18 @@ pip_install_if_debug () {
   fi
 }
 
+prepare_tox_file () {
+  TEMPLATE="$1"
+  PASSING="$2"
+  NOINSTALL="$3"
+  NOTFOUND="$4"
+  sed 's/{{ALL}}/'"$(commasep "$PASSING $NOINSTALL $NOTFOUND py20")"'/;
+    s/{{PASSING}}/'"$(commasep "$PASSING")"'/;
+    s/{{NOINSTALL}}/'"$(commasep "$NOINSTALL")"'/;
+    s/{{NOTFOUND}}/'"$(commasep "$NOTFOUND")"'/' \
+    "$TEMPLATE"
+}
+
 validate_image_tags_coverage () {
   TAGS="$1"
   # shellcheck disable=SC2001
