@@ -121,6 +121,7 @@ clean:
 # just changelog
 # (proofread changelog)
 #
+# just docs
 # just build
 # just push-pypi
 # (create github release)
