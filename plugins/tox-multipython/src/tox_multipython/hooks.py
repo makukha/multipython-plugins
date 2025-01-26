@@ -94,6 +94,7 @@ if TOX4:
 
 # shared functionality
 
+
 def get_python_path(requests):  # type: (List[str]) -> Optional[str]
     if DEBUG:
         debug('Looking for tag in candidates: {}'.format(requests))
