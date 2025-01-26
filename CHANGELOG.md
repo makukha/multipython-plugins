@@ -4,15 +4,18 @@ All notable changes to this project will be documented in this file. Changes for
 
 <!-- towncrier release notes start -->
 
-## [v251P](https://github.com/makukha/multipython-plugins/releases/tag/v251P) — 2025-01-25
+## [v251R](https://github.com/makukha/multipython-plugins/releases/tag/v251R) — 2025-01-27
 
 ***Added 🌿***
+
 
 - `tox-multipython` plugin ([#1](https://github.com/makukha/multipython-plugins/issues/1))
 - `virtualenv-multipython` plugin ([#1](https://github.com/makukha/multipython-plugins/issues/1))
 - `tox-multipython` — added support for tox 4 and dependency on `virtualenv-multipython` for all functionality related to multipython tags ([#1](https://github.com/makukha/multipython-plugins/issues/1))
+- `tox-multipython` — allow multipython tag in `base_python`/`basepython` to override `env_name`-based suggestion ([#3](https://github.com/makukha/multipython-plugins/issues/3))
+- `tox-multipython` — recognize multipython tags in multi-factor env names ([#3](https://github.com/makukha/multipython-plugins/issues/3))
 
 ***Released:***
 
-- `tox-multipython` 0.3.0 ([#1](https://github.com/makukha/multipython-plugins/issues/1))
-- `virtualenv-multipython` 0.5.0 ([#1](https://github.com/makukha/multipython-plugins/issues/1))
+- tox-multipython v0.4.0 ([#6](https://github.com/makukha/multipython-plugins/issues/6))
+- virtualenv-multipython v0.5.1 ([#7](https://github.com/makukha/multipython-plugins/issues/7))
