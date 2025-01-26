@@ -6,4 +6,4 @@ build-backend = "hatchling.build"
 name = "samplepkg"
 version = "1"
 requires-python = ">=2.7"
-scripts = { samplepkg = "samplepkg:main" }
+scripts = { samplepkg = "samplepkg.__main__:main" }

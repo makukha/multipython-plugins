@@ -139,8 +139,9 @@ In every case, both `tox-multipython` and `virtualenv-multipython` are installed
 When plugins are installed inside *host tag* environment, for every *target tag* environment icons are used to denote test outcome:
 
 * ✅ — all testing requirements are satisfied for *target tag*
-* 🚫️ — *target tag* interpreter is not discoverable
-* 💥 — *target tag* interpreter is discoverable, but virtual environment with *sample package* cannot be created
+* ⛔️ — *target tag* interpreter is not discoverable
+* 🚫️ — *target tag* interpreter is discoverable, but virtual environment with *sample package* cannot be created
+* 🚷 — *target tag* environment with *sample package* can be created, but *sample package* cannot be executed
 
 
 ## tox3
@@ -176,16 +177,16 @@ When plugins are installed inside *host tag* environment, for every *target tag*
 <pre>
   HOST    TARGETS
 ——————    A B C D E F G H I J K L M
-py314t  A ✅✅✅✅✅✅✅✅✅✅💥💥💥
-py313t  B ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py314  C ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py313  D ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py312  E ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py311  F ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py310  G ✅✅✅✅✅✅✅✅✅✅💥💥💥
-  py39  H ✅✅✅✅✅✅✅✅✅✅💥💥💥
-  py38  I ✅✅✅✅✅✅✅✅✅✅💥💥💥
-  py37  J ✅✅✅✅✅✅✅✅✅✅💥💥💥
+py314t  A ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+py313t  B ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py314  C ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py313  D ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py312  E ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py311  F ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py310  G ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py39  H ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py38  I ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py37  J ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
   py36  K ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py35  L ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py27  M ✅✅✅✅✅✅✅✅✅✅✅✅✅
@@ -199,16 +200,16 @@ py313t  B ✅✅✅✅✅✅✅✅✅✅💥💥💥
 <pre>
   HOST    TARGETS
 ——————    A B C D E F G H I J K L M
-py314t  A ✅✅✅✅✅✅✅✅✅✅💥💥💥
-py313t  B ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py314  C ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py313  D ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py312  E ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py311  F ✅✅✅✅✅✅✅✅✅✅💥💥💥
- py310  G ✅✅✅✅✅✅✅✅✅✅💥💥💥
-  py39  H ✅✅✅✅✅✅✅✅✅✅💥💥💥
-  py38  I ✅✅✅✅✅✅✅✅✅✅💥💥💥
-  py37  J ✅✅✅✅✅✅✅✅✅✅💥💥💥
+py314t  A ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+py313t  B ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py314  C ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py313  D ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py312  E ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py311  F ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py310  G ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+  py39  H ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+  py38  I ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+  py37  J ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
   py36  K ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py35  L ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py27  M ✅✅✅✅✅✅✅✅✅✅✅✅✅
@@ -278,16 +279,16 @@ py313t  B ✅✅✅✅✅✅✅✅✅✅✅✅✅
 <pre>
   HOST    TARGETS
 ——————    A B C D E F G H I J K L M
-py314t  A ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-py313t  B ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py314  C ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py313  D ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py312  E ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py311  F ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py310  G ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py39  H ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py38  I ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py37  J ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
+py314t  A ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+py313t  B ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py314  C ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py313  D ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py312  E ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py311  F ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py310  G ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py39  H ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py38  I ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py37  J ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
   py36  K . . . . . . . . . . . . .
   py35  L . . . . . . . . . . . . .
   py27  M . . . . . . . . . . . . .
@@ -301,16 +302,16 @@ py313t  B ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
 <pre>
   HOST    TARGETS
 ——————    A B C D E F G H I J K L M
-py314t  A ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-py313t  B ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py314  C ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py313  D ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py312  E ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py311  F ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py310  G ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py39  H ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py38  I ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py37  J ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
+py314t  A ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+py313t  B ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py314  C ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py313  D ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py312  E ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py311  F ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+ py310  G ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+  py39  H ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+  py38  I ✅✅✅✅✅✅✅✅✅✅🚷🚷⛔️
+  py37  J ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
   py36  K . . . . . . . . . . . . .
   py35  L . . . . . . . . . . . . .
   py27  M . . . . . . . . . . . . .
@@ -381,16 +382,16 @@ py313t  B ✅✅✅✅✅✅✅✅✅✅✅✅✅
 <pre>
   HOST    TARGETS
 ——————    A B C D E F G H I J K L M
-py314t  A ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-py313t  B ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py314  C ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py313  D ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py312  E ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py311  F ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py310  G ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py39  H ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py38  I ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py37  J ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
+py314t  A ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+py313t  B ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py314  C ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py313  D ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py312  E ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py311  F ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py310  G ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py39  H ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py38  I ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py37  J ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
   py36  K ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py35  L ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py27  M ✅✅✅✅✅✅✅✅✅✅✅✅✅
@@ -404,16 +405,16 @@ py313t  B ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
 <pre>
   HOST    TARGETS
 ——————    A B C D E F G H I J K L M
-py314t  A ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-py313t  B ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py314  C ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py313  D ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py312  E ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py311  F ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
- py310  G ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py39  H ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py38  I ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
-  py37  J ✅✅✅✅✅✅✅✅✅✅🚫🚫🚫
+py314t  A ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+py313t  B ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py314  C ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py313  D ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py312  E ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py311  F ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+ py310  G ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py39  H ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py38  I ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
+  py37  J ✅✅✅✅✅✅✅✅✅✅⛔️⛔️⛔️
   py36  K ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py35  L ✅✅✅✅✅✅✅✅✅✅✅✅✅
   py27  M ✅✅✅✅✅✅✅✅✅✅✅✅✅
