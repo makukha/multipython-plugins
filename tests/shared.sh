@@ -2,8 +2,9 @@
 set -eEuo pipefail
 
 
-export SAMPLEPKG="$(find "/work/tests/samplepkg/dist" -name '*.whl')"
+SAMPLEPKG="$(find "/work/tests/samplepkg/dist" -name '*.whl')"
 [ -n "$SAMPLEPKG" ]
+export SAMPLEPKG
 
 
 if [ "${DEBUG:-}" = "true" ]; then

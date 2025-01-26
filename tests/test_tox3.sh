@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -eEuo pipefail
 
+# shellcheck disable=SC1091 # shared.sh already checked
 . shared.sh
 
 # inputs
@@ -12,6 +13,7 @@ validate_image_tags_coverage "$PASSING $NOEXEC $NOINSTALL $NOTFOUND"
 py install --sys "$HOST" --no-update-info
 pip uninstall -y tox virtualenv
 rm /root/.config/virtualenv/virtualenv.ini
+# shellcheck disable=SC2046 # not quoted intentionally
 pip_install $(tr : ' ' <<<"$DEPS") \
   "tox-multipython @ file://$(find /work/plugins/tox-multipython/dist -name '*.whl')" \
   "virtualenv-multipython @ file://$(find /work/plugins/virtualenv-multipython/dist -name '*.whl')"

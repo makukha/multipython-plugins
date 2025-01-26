@@ -6,10 +6,11 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 
 bracex () {
-  eval echo "$(sed 's/:/ : /'g)" | sed 's/\s*:\s*/:/g'
+  eval echo "$(sed 's/:/ : /g')" | sed 's/\s*:\s*/:/g'
 }
 
 list_cases () {
+  # shellcheck disable=SC2016 # single quotes are fine
   yq 'to_entries | filter(.key!="requirements")[] | . ref $suite | .value
     | to_entries[] | . ref $tag | .value
     | to_entries[] | . ref $venv
@@ -19,6 +20,7 @@ list_cases () {
 
 case_data () {
   IFS='-' read -r SUITE VENV TAG <<<"$1"
+  # shellcheck disable=SC2016 # single quotes are fine
   yq 'to_entries | filter(.key=="'"$SUITE"'")[] | . ref $suite | .value
     | to_entries | filter(.key=="'"$TAG"'") | .[] | . ref $tag | .value
     | to_entries | filter(.key=="'"$VENV"'") | .[] | . ref $venv
