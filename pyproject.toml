@@ -24,7 +24,7 @@ dev = [
 # bump-my-version
 
 [tool.bumpversion]
-current_version = "251P"
+current_version = "251R"
 allow_dirty = true
 
 parse = """(?x)
