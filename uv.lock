@@ -1484,7 +1484,7 @@ wheels = [
 
 [[package]]
 name = "virtualenv-multipython"
-version = "0.5.0"
+version = "0.5.1"
 source = { editable = "plugins/virtualenv-multipython" }
 dependencies = [
     { name = "virtualenv", version = "20.15.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.6'" },

@@ -65,7 +65,7 @@ multipython = "virtualenv_multipython.discover:MultiPython"
 # bump-my-version
 
 [tool.bumpversion]
-current_version = "0.5.0"
+current_version = "0.5.1"
 allow_dirty = true
 files = [
   {filename = "docs/part/badges.md"},
