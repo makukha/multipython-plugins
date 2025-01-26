@@ -54,7 +54,7 @@ dynamic = [
 requires-python = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3,!=3.4"
 dependencies = [
   "tox>=3",
-  "virtualenv-multipython>=0.5",
+  "virtualenv-multipython==0.5.1",
 ]
 [project.optional-dependencies]
 debug = ["loguru>=0.7; python_version>='3.5'"]
@@ -66,7 +66,7 @@ multipython = "tox_multipython.hooks"
 # bump-my-version
 
 [tool.bumpversion]
-current_version = "0.3.0"
+current_version = "0.4.0"
 allow_dirty = true
 files = [
   {filename = "docs/part/badges.md"},
