@@ -60,7 +60,7 @@ dependencies = [
 debug = ["loguru>=0.7; python_version>='3.5'"]
 
 [project.entry-points.tox]
-multipython = "tox_multipython.hookimpl"
+multipython = "tox_multipython.hooks"
 
 
 # bump-my-version

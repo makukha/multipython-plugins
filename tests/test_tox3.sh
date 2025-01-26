@@ -5,8 +5,8 @@ set -eEuo pipefail
 
 # inputs
 read -r DEPS HOST TARGETS <<<"$@"
-IFS=: read -r PASSING NOINSTALL NOTFOUND <<<"$TARGETS"
-validate_image_tags_coverage "$PASSING $NOINSTALL $NOTFOUND"
+IFS=: read -r PASSING NOEXEC NOINSTALL NOTFOUND <<<"$TARGETS"
+validate_image_tags_coverage "$PASSING $NOEXEC $NOINSTALL $NOTFOUND"
 
 # setup
 py install --sys "$HOST" --no-update-info
@@ -16,30 +16,25 @@ pip_install $(tr : ' ' <<<"$DEPS") \
   "tox-multipython @ file://$(find /work/plugins/tox-multipython/dist -name '*.whl')" \
   "virtualenv-multipython @ file://$(find /work/plugins/virtualenv-multipython/dist -name '*.whl')"
 pip_install_if_debug loguru
-if [ "${DEBUG:-}" = "true" ]; then
-  TOX="tox -c /tmp/tox.ini -vvv"
-else
-  TOX="tox -c /tmp/tox.ini"
-fi
 
 # test: test passing tags
-prepare_tox_file tox.passing.ini "$PASSING" "$NOINSTALL" "$NOTFOUND" > /tmp/tox.ini
 for TAG in $PASSING; do
-  $TOX run -e "$TAG" --installpkg="$SAMPLEPKG"
+  [ "$(get_tox_outcome "$TAG")" = "passing" ]
+done
+
+# test: test non-executable tags
+for TAG in $NOEXEC; do
+  [ "$(get_tox_outcome "$TAG")" = "noexec" ]
 done
 
 # test: test non-installable tags
-prepare_tox_file tox.noinstall.ini "$PASSING" "$NOINSTALL" "$NOTFOUND" > /tmp/tox.ini
 for TAG in $NOINSTALL; do
-  if $TOX run -e "$TAG" --installpkg="$SAMPLEPKG"; then false; fi
-  [[ "$($TOX run -e "$TAG" --installpkg="$SAMPLEPKG")" != *" InterpreterNotFound: "* ]]
+  [ "$(get_tox_outcome "$TAG")" = "noinstall" ]
 done
 
 # test: test non-discoverable tags
-prepare_tox_file tox.notfound.ini "$PASSING" "$NOINSTALL" "$NOTFOUND" > /tmp/tox.ini
 for TAG in $NOTFOUND py20; do
-  if $TOX run -e "$TAG" --skip-pkg-install; then false; fi
-  [[ "$($TOX run -e "$TAG" --skip-pkg-install)" == *" InterpreterNotFound: "* ]]
+  [ "$(get_tox_outcome "$TAG")" = "notfound" ]
 done
 
 # finish

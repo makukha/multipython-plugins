@@ -5,8 +5,8 @@ set -eEuo pipefail
 
 # inputs
 read -r DEPS HOST TARGETS <<<"$@"
-IFS=: read -r PASSING NOINSTALL NOTFOUND <<<"$TARGETS"
-validate_image_tags_coverage "$PASSING $NOINSTALL $NOTFOUND"
+IFS=: read -r PASSING NOEXEC NOINSTALL NOTFOUND <<<"$TARGETS"
+validate_image_tags_coverage "$PASSING $NOEXEC $NOINSTALL $NOTFOUND"
 
 # setup
 py install --sys "$HOST" --no-update-info
@@ -22,27 +22,24 @@ virtualenv --no-seed --with-traceback "/tmp/venv"
 [ "$(py tag "/tmp/venv/bin/python")" = "$HOST" ]
 rm -rf /tmp/venv
 
-# test: passing tags
+# test: test passing tags
 for TAG in $PASSING; do
-  virtualenv -p "$TAG" --with-traceback "/tmp/$TAG"
-  [ "$(py tag "/tmp/$TAG/bin/python")" = "$TAG" ]
-  "/tmp/$TAG/bin/python" -m pip install "$SAMPLEPKG"
-  [ "$("/tmp/$TAG/bin/python" -m samplepkg)" = "success" ]
-  rm -rf "/tmp/$TAG"
+  [ "$(get_venv_outcome "$TAG")" = "passing" ]
+done
+
+# test: test non-executable tags
+for TAG in $NOEXEC; do
+  [ "$(get_venv_outcome "$TAG")" = "noexec" ]
 done
 
 # test: test non-installable tags
 for TAG in $NOINSTALL; do
-  virtualenv -p "$TAG" --with-traceback "/tmp/$TAG"
-  [ "$(py tag "/tmp/$TAG/bin/python")" = "$TAG" ]
-  if "/tmp/$TAG/bin/python" -m pip install "$SAMPLEPKG"; then false; fi
-  rm -rf "/tmp/$TAG"
+  [ "$(get_venv_outcome "$TAG")" = "noinstall" ]
 done
 
-# test: not found tags
+# test: test non-discoverable tags
 for TAG in $NOTFOUND py20; do
-  [[ "$(virtualenv -p "$TAG" "/tmp/$TAG" 2>&1)" == *"RuntimeError: failed to find interpreter "* ]]
-  [ ! -d "/tmp/$TAG" ]
+  [ "$(get_venv_outcome "$TAG")" = "notfound" ]
 done
 
 # finish

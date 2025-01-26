@@ -22,7 +22,7 @@ case_data () {
   yq 'to_entries | filter(.key=="'"$SUITE"'")[] | . ref $suite | .value
     | to_entries | filter(.key=="'"$TAG"'") | .[] | . ref $tag | .value
     | to_entries | filter(.key=="'"$VENV"'") | .[] | . ref $venv
-    | "\(.value.passing):\(.value.noinstall):\(.value.notfound)"' \
+    | "\(.value.passing):\(.value.noexec):\(.value.noinstall):\(.value.notfound)"' \
     "$SCRIPT_DIR/cases.toml"
 }
 
