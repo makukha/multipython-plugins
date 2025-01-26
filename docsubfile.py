@@ -14,8 +14,9 @@ IMG = 'makukha/multipython:unsafe'
 CASES_TOML = Path('tests/cases.toml')
 
 PASSING = '✅'
-NOINSTALL = '💥'
-NOTFOUND = '🚫'
+NOEXEC = '🚷'
+NOINSTALL = '🚫'
+NOTFOUND = '⛔️'
 COLSP = ' '
 
 
@@ -54,6 +55,7 @@ def generate(env: Environment) -> None:
         for tag, val in cross.items():
             marks = [
                 *((t, 'P') for t in filter(None, bracex.expand(val['passing']))),
+                *((t, 'E') for t in filter(None, bracex.expand(val['noexec']))),
                 *((t, 'I') for t in filter(None, bracex.expand(val['noinstall']))),
                 *((t, 'F') for t in filter(None, bracex.expand(val['notfound']))),
             ]
@@ -97,7 +99,7 @@ def pretty(env: Environment, suite: str) -> None:
     for i, tag in enumerate(tags):
         res = data['host_results'].get(tag)
         marks = (
-            [{'P': PASSING, 'I': NOINSTALL, 'F': NOTFOUND}[x] for x in res]
+            [{'P': PASSING, 'E': NOEXEC, 'I': NOINSTALL, 'F': NOTFOUND}[x] for x in res]
             if res
             else COLSP.join('.' * len(tags))
         )
